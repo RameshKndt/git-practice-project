@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <script type="text/JavaScript">
+        function loginUser(email,password){
+            let user = {email:"",password:""};
+            return new Promise((resolve)=>{
+            setTimeout(()=>{
+                console.log("UserLoggedIn");
+                //logging functionality
+                user["email"] = email;
+                user["password"] = password;
+                resolve(user);
+            },5000);
+        });
+        
+        }
+
+
+        function getUserVedios(email){
+            let vedios = [];
+            return new Promise((resolve)=>{
+            setTimeout(()=>{
+                console.log("We are in getUserVedio Details",email);
+                vedios  = ["AlaVaikuntaPuramLo","Banni","Badri"];
+                resolve(vedios);
+            },3000);
+        });
+            
+        }
+
+        function vedioDetails(vedioName){
+            return new Promise((resolve)=>
+            setTimeout(()=>{
+                console.log("vedioName-->",vedioName);     
+            },2000));
+            
+        }
+      async function getUserVedioDetails(email,password){
+            //"ram@gmail.com","ramesh"
+            /*
+            const user   = loginUser(email,password,user=>{
+                                console.log("User Details ",user);
+                                    getUserVedios(user.email,vedios=>{
+                                                console.log("vedios ",vedios);
+                                                vedioDetails(vedios[0]);
+                                        
+                                            });
+                            });   
+             */
+            /*
+             loginUser(email,password).then(result=>{console.log("Result 1:",result);
+                                                    return getUserVedios(result)
+                                            })
+                                      .then(vedio=>vedioDetails(vedio));
+             */                         
+            let user = await loginUser(email,password);
+            console.log("User Data ",user);
+            let vedios = await getUserVedios(user);
+            console.log("Vedios",vedios);
+            vedioDetails(vedios);
+        }
+
+        getUserVedioDetails("ram@gmail.com","ramesh");
+
+    </script>
+</head>
+</html>
